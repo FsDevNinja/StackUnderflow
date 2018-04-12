@@ -1,0 +1,18 @@
+I"D(function() {
+  var simpleMDE;
+
+  simpleMDE = null;
+
+  $(document).on("turbolinks:before-visit", function() {
+    if (simpleMDE != null) {
+      simpleMDE.toTextArea();
+      return simpleMDE = null;
+    }
+  });
+
+  $(document).on("turbolinks:load", function() {
+    return simpleMDE = new SimpleMDE();
+  });
+
+}).call(this);
+:ET

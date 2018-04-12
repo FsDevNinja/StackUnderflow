@@ -1,0 +1,64 @@
+<div class="row ml-1"><h2>Forum</h2>
+  <div class="ml-auto mr-3">
+    <div class="forum-search ml-auto">
+      <%= form_tag forum_threads_path, method: :get, class: " form-inline" do %>
+        <div class="btn-group">
+          <%= text_field_tag :q, nil, placeholder: 'Search Forum' %>
+          <%= submit_tag 'Search', class: "btn btn-primary my-2 my-sm-0" %>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-12">
+    <div class="card card-body">
+      <%= link_to "Ask a Question", new_forum_thread_path, class: 'btn btn-primary ask-a-question' %>
+      <hr class="divider-hr">
+      <h5>Categories</h5>
+      <ul class="list-group">
+        <% @categories.each do |cat| %>
+        <li class="cat-list"><a href="/forum/category/<%= cat %>"><i class="fa fa-square mr-2 cat-<%= cat %>"></i> <%= cat %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-12">
+    <div class="card ">
+      <div class="card-body">
+        <% if @forum_threads.empty? %>
+           <h4>Sorry, There are no threads for this search.</h4><%= link_to "See all threads", forum_threads_path %>
+        <% else %> 
+          <% @forum_threads.each do |thread| %>
+            <div class="d-flex flex-row align-items-center p-2">
+            <%= image_tag 'default_avatar.png', class: "forum-thread-avatar"%>
+              <div class="">
+                <h4 class="forum-title"><a href="<%= forum_thread_path(thread)%>" class="forum-thread-title"><%= thread.subject.capitalize %></a></h4>
+                <div class="forum-thread-meta"><a href="/forum/category/<%= thread.category%>" class="category-link cat-<%= thread.category %>"><%=thread.category.upcase %></a> <span>ASKED ON <%= thread.created_at.strftime("%A, %B %d").upcase %> BY</span> <a href="/profile/<%= thread.user.id %>"><%= full_name(thread.user).upcase %></a></div>
+              </div>
+              <% if thread.solved? %>
+                <div class="ml-auto mr-2"><span class="fa fa-check-circle fa-lg success thread-solved"></span></div>
+                <div>
+                  <div class="text-center">
+                    <a class="forum-thread-post-count-text" href="<%= forum_thread_path(thread)%>">
+                      <span><%= thread.forum_posts.count %></span><br><span >posts</span>
+                    </a>
+                  </div>
+                </div>
+              <% else %>
+                <div class="ml-auto">
+                  <div class="text-center">
+                    <a class="forum-thread-post-count-text" href="<%= forum_thread_path(thread)%>">
+                      <span><%= thread.forum_posts.count %></span><br><span >posts</span>
+                    </a>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <hr class="divider-hr">
+          <% end %>
+        <% end %>  
+      </div>
+    </div>    
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="row ml-1"><h2>Forum</h2>
+  <div class="ml-auto mr-3">
+    <div class="forum-search ml-auto">
+      <%= form_tag forum_threads_path, method: :get, class: " form-inline" do %>
+        <div class="btn-group">
+          <%= text_field_tag :q, nil, placeholder: 'Search Forum' %>
+          <%= submit_tag 'Search', class: "btn btn-primary my-2 my-sm-0" %>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-12">
+    <div class="card card-body">
+      <%= link_to "Ask a Question", new_forum_thread_path, class: 'btn btn-primary ask-a-question' %>
+      <hr>
+      <h5>Categories</h5>
+      <ul class="list-group">
+        <% @categories.each do |cat| %>
+
+        <li class="cat-list"><a href="/forum/category/<%= cat %>"><i class="fa fa-square mr-2 cat-<%= cat %>"></i> <%= cat %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-12">
+    <div class="card card-body">
+      <h2>Update Your Forum Thread</h2>
+      <%= simple_form_for @forum_thread, url: forum_thread_path do |f| %>
+        <div class="form_group">
+        <%= f.input :category, prompt: "Choose a Category...", collection: @categories %>
+        </div>
+        <div class="form_group">
+        <%= f.input :subject %>
+        </div>
+        <div class="form_group">
+        <%= f.button :submit, class: "btn btn-primary float-right add-comment-button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

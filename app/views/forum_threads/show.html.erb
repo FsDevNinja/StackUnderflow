@@ -1,0 +1,97 @@
+<div class="row ml-1"><h2>Forum</h2>
+  <div class="ml-auto mr-3">
+    <div class="forum-search ml-auto">
+      <%= form_tag forum_threads_path, method: :get, class: " form-inline" do %>
+        <div class="btn-group">
+          <%= text_field_tag :q, nil, placeholder: 'Search Forum' %>
+          <%= submit_tag 'Search', class: "btn btn-primary my-2 my-sm-0" %>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-12">
+      
+      <div class="card card-body">
+        <%= link_to "Ask a Question", new_forum_thread_path, class: 'btn btn-primary ask-a-question' %>
+        <hr class="divider-hr">
+        <h5>Categories</h5>
+        <ul class="list-group">
+          <% @categories.each do |cat| %>
+
+         <li class="cat-list"><a href="/forum/category/<%= cat %>"><i class="fa fa-square mr-2 cat-<%= cat %>"></i><%= cat %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="col-lg-9 col-md-12">
+      
+      <div class="card">
+        <div class="card-body">
+          <h2 class="forum-title"><%= @forum_thread.subject.capitalize %></h2>
+          <div class="d-flex">
+          <div class="forum-thread-meta"><a href="/forum/category/<%= @forum_thread.category%>" class="category-link cat-<%= @forum_thread.category %>"><%= @forum_thread.category.upcase %></a> <span>ASKED ON <%= @forum_thread.created_at.strftime("%A, %B %d").upcase %> BY</span> <a href="/profile/<%= @forum_thread.user.id %>"><%= full_name(@forum_thread.user).upcase %></a></div>
+          <% if current_user == @forum_thread.user %>
+          <a class="ml-auto" href="<%= edit_forum_thread_path %>"><span class="fa fa-pencil-square-o " data-toggle="tooltip" data-placement="left" title="Edit This Thread"></span></a>
+          <%end %>
+          </div>
+          <hr class="divider-hr">
+            <ul class="list-group">
+            <% @forum_posts.each do |post| %>
+              <% if post.solved == true %>
+              <li class="forum-post post-solved"><% if post.user != nil %>
+              <%= image_tag 'default_avatar.png', class: "post-avatar"%>
+              <% end %>
+              <div class="post-meta"><a href="/profile/<%= post.user.id %>" class="poster-name"><%= full_name(post.user)%></a> commented on <%= post.created_at.try(:strftime,'%A, %B %d') %> </div><div class="post-body"><p><%= markdown(post.body).html_safe %></p></div>
+                <hr class="post-hr">
+                <% if @forum_thread.user == current_user %>
+                  <div class="problem-solved ml-auto"><i class="fa fa-check-circle"></i> Solved<small>  <%= link_to "undo",forum_thread_forum_post_unsolved_path(@forum_thread, post), class: "undo-btn"%></small></div>
+                <% end%>
+              <% else %>
+              <li class="forum-post "><% if post.user != nil %>
+              <%= image_tag 'default_avatar.png', class: "post-avatar"%>
+              <% end %>
+              <div class="d-flex justify-content-between post-meta-wrapper">
+                <div class="post-meta">
+                  <a href="/profile/<%= post.user.id %>" class="poster-name"><%= full_name(post.user)%></a> commented on <%= post.created_at.try(:strftime,'%A, %B %d') %>
+                </div>
+                <% if current_user == post.user %>
+                <div class="edit-post-btn">
+                  <a href="<%= edit_forum_thread_forum_post_path(@forum_thread,post)%>"><span class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="left" title="Edit This Post"></span></a>
+                </div>
+                <% end %>
+              </div>
+              <div class="post-body"><p><%= markdown(post.body).html_safe %></p></div>
+              <hr class="post-hr">
+                <% if @forum_thread.user == current_user %>
+                  <div class="problem-solved ml-auto primary"><i class="fa fa-check primary"></i><%= link_to "This solved my problem.", forum_thread_forum_post_solved_path(@forum_thread, post) %></div>
+                <% end%>
+              <% end %>
+              </li>
+              <hr class="divider-hr">
+            <% end %>
+            <% if user_signed_in? %>
+            <li class="simplemde-item">
+              <%= form_for [@forum_thread, @forum_post], url: forum_thread_forum_posts_path(@forum_thread) do |f| %>
+                <%= f.text_area :body %>
+                <%= f.submit "Add a Comment", class: "btn btn-primary float-right add-comment-button" %>
+              <% end %>
+            </li>
+            <% else %>
+              <li class="forum-post">
+                <p>You must <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> to post on this forum thread.</p>
+              </li>
+            <% end %>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+

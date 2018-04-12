@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-lg-3 col-md-12">
+    <div class="card card-body">
+      <%= image_tag 'default_avatar.png', class: "profile-img mb-3" %>
+      <h2><%= full_name(@user)%></h2>
+      <hr class="divder-hr">
+      <div class="mb-2"><i class="fa fa-clock-o"></i> Joined on <%= @user.created_at.strftime("%B %d") %></div>
+      <div><i class="fa fa-check-circle"></i> Problems Solved: <%= @user.problems_solved %></div>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-12">
+  <h5 class="text-center">Activity Feed</h5>
+    <div class="card ">
+      <div class="card-card-body mt-2">
+      <ul>
+        <% @user.forum_posts.order(created_at: :desc).each do |post| %>
+        <li class="activity-list-item"><span class="poster-name"><%= full_name(@user)%></span> commented on <a href="<%= forum_thread_path(post.forum_thread) %>" class="cat-<%= post.forum_thread.category %>"><%= post.forum_thread.subject%></a> on <%= post.created_at.strftime("%A, %B %d") %> </li>
+        <hr class="divder-hr">
+        <% end %>
+      </ul>
+      </div>
+    </div>    
+  </div>
+</div>

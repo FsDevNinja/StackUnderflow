@@ -1,0 +1,413 @@
+@import "simplemde.min";
+@import "font-awesome";
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:500,300');
+$blue: #3498db;
+$darkblue: #2980b9;
+$lightgrey: #F8F8FA;
+$grey: #e7e7e7;
+$mediumgrey: #BDBDBD;
+$darkgrey: #333333;
+$success: #5cb85c;
+$darkgreen: #1B5E20;
+$alert: #f44336;
+$darkred: #d50000;
+
+$bodyfont: 'Open Sans', sans-serif;
+$titlefont: 'Roboto', sans-serif;
+
+h1,h2,h3,h4,h5,h6,{
+  font-family: $titlefont;
+  color: $darkgrey;
+}
+
+a {
+  color: $blue;
+  &:hover{
+    color: $blue;
+    text-decoration: none;
+  }
+}
+
+.ml-1 {
+  margin-left: 15px;
+}
+.nav-divider {
+  border-bottom: $grey 4px solid;
+}
+
+.btn-primary {
+  background-color: $blue;
+  border-bottom: $darkblue 4px solid;
+}
+
+.btn-secondary {
+  border-color: $lightgrey;
+  background-color: $lightgrey;
+  border-bottom: $grey 4px solid;
+
+}
+
+.close {
+  color: #fff;
+}
+
+.notification-dropdown{
+  a {
+    color: $darkgrey;
+  }
+}
+.notification-icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  align-items: center;
+}
+.nav-item {
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+}
+.nav-avatar {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 3px;
+}
+
+.post-avatar {
+  position: absolute;
+  top: 30px;
+  left: 15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 3px;
+}
+
+.forum-thread-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 3px;
+}
+
+.notification-avatar {
+  margin-top: 5px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 3px;
+}
+.navbar {
+  margin-bottom: 45px;
+  padding: 0;
+  min-height: 56px;
+  background-color: #fff;
+}
+.navbar-brand {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 25px;
+  color: $darkgrey;
+  padding: 0;
+}
+
+.nav-link {
+font-weight: 700;
+color: $grey;
+}
+
+.account-dropdown {
+  margin: 3px 0 0;
+  left: -112px;
+  border-bottom: $grey 4px solid;
+}
+
+.notification-dropdown {
+  margin: 3px 0 0;
+  width: 400px;
+  left: -375px;
+  border-bottom: $grey 4px solid;
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: $darkgrey;
+  white-space: normal;
+}
+
+.notice {
+  margin-top: -45px;
+  display: flex;
+  color: #fff;
+  background-color: $blue;
+  border-radius: 0px;
+  border-bottom: $darkblue 4px solid;
+  height: 65px;
+  -ms-align-items: center;
+  align-items: center;
+  margin-bottom: 25px;
+
+}
+
+
+
+.alert {
+  margin-top: -45px;
+  display: flex;
+  color: #fff;
+  background-color: $alert;
+  border-radius: 0px;
+  border-bottom: $darkred 4px solid;
+  height: 65px;
+  -ms-align-items: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.alert-info {
+  color: #fff;
+  background-color: $blue;
+  border-color: $darkblue;
+} 
+
+.sign-up a {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+body {
+  background-color: $lightgrey;
+  font-family: $bodyfont;
+}
+
+.simplemde-item {
+  list-style: none;
+}
+
+.add-comment-button {
+  margin-top: 25px;
+}
+
+.card{
+  background-color: #fff;
+  border-bottom: $grey solid 4px;
+}
+
+.forum-post {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 1.5rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+}
+
+.divider-hr {
+  flex: 1;
+  border-top: $grey 1px solid;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.post-hr {
+  width: 100%;
+  border-top: $grey 1px solid;
+}
+
+.forum-search {
+  margin-bottom: 10px;
+}
+
+#q {
+  border: $grey solid 1px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding-left: 10px;
+}
+
+.forum-thread-title {
+  color: $darkgrey;
+  &:hover{
+    color: $darkgrey;
+    text-decoration: none;
+  }
+}
+
+.forum-title {
+  margin-left: 15px;
+}
+.forum-thread-meta {
+  font-size: 12px;
+  margin-left: 15px;
+}
+
+.forum-thread-meta span {
+  color: $mediumgrey;
+}
+
+.category-link, .poster-name {
+  font-weight: 600;
+}
+
+.post-meta {
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.post-meta, .post-body {
+  margin-left: 56px;
+}
+
+.post-body {
+  overflow: hidden;
+  width: 100%;
+  margin-top: -17px;
+}
+
+.notification-user-name {
+  font-weight: 800;
+  color: $darkgrey;
+}
+
+.ask-a-question {
+  justify-content: center;
+  width: 100%;
+}
+
+.cat-list {
+  list-style-type: none;
+  a {
+    color: $darkgrey;
+    text-decoration: none;
+    &:hover {
+      font-weight: 800;
+    }
+  }
+}
+
+.cat-All {
+  color: #34495e;
+}
+
+.cat-CSS {
+  color: #9b59b6;
+}
+
+.cat-Databases {
+  color: $blue;
+}
+
+.cat-Gems {
+  color: #2ecc71;
+}
+
+.cat-General {
+  color: #1abc9c;
+}
+
+.cat-Javascript {
+  color: #f1c40f;
+}
+
+.cat-Rails {
+  color: #e67e22;
+}
+
+.cat-Ruby {
+  color: #e74c3c;
+}
+
+.cat-Servers {
+  color: #95a5a6;
+}
+
+.cat-Showcase {
+  color: #d35400;
+}
+
+.cat-Feedback {
+  color: #f39c12;
+}
+
+.cat-Testing {
+  color: #27ae60;
+}
+
+.cat-Tips {
+  color: $darkblue;
+}
+
+.forum-thread-post-count-text {
+  color: $mediumgrey;
+}
+
+.post-solved {
+  border-bottom: $darkgreen 4px solid;
+  border-radius: 4px;
+  background-color: $success;
+  color: #ffffff;
+}
+
+.success {
+  color: $success
+}
+
+.primary {
+  color: $blue;
+}
+
+.undo-btn{
+  color: white;
+  &:hover {
+    color: white;
+    font-weight: 700;
+  }
+}
+
+.fa-lg {
+  font-size: 1.5em;
+}
+
+.post-meta-wrapper {
+  width: 100%;
+}
+
+.edit-post-btn{
+  margin-right: -20px;
+}
+
+.new_forum_post {
+    height: 300px;
+}
+
+.profile-img {
+  max-width: 213px;
+  height: 213px;
+  border-radius: 4px;
+}
+
+.activity-list-item {
+  margin-bottom: 15px;
+  list-style-type: none;
+}
+
+.dashboard-thread {
+  position: relative;
+  
+}
+
+.dashboard-avatar {
+  position: absolute;
+  left: -50px;
+  width: 48px;
+  height: 48px;
+  border-radius: 3px;
+}
+
+.recent-questions {
+  font-weight: 300;
+}

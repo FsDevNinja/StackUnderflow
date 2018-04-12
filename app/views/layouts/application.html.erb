@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stackunderflow</title>
+    <%= csrf_meta_tags %>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a style="font-size: 25px;" href="<%= root_path %>">Stack<strong>underflow</strong></a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to("Forum", forum_threads_path, class: 'nav-link') %>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= image_tag image_url("notification_icon.svg"), class: "notification-icon"%></a>
+        <div class="dropdown-menu notification-dropdown" id="notification-dropdown" aria-labelledby="dropdown02">
+          <p class="dropdown-item">Sorry, you have no notifications.</p>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= image_tag 'default_avatar.png', class: "nav-avatar"%></a>
+        <div class="dropdown-menu account-dropdown" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/profile/<%= current_user.id %>">View Profile</a>
+          <a class="dropdown-item" href="<%= edit_user_registration_path%>">Account Settings</a>
+          <div class="dropdown-divider"></div>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+        </div>
+      </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to("Login", new_user_session_path, class: 'nav-link') %>
+        </li>
+        <button type="button" class="btn btn-primary sign-up"><a href="<%= new_user_registration_path %>">Sign Up</a></button>
+      <% end %>
+    </ul>
+  </div>
+  </div>
+</nav>
+    <% unless notice.nil? %>
+    <div class="notice"><div class="container"><%= notice %><a class="close" data-dismiss="notice" href="" aria-hidden="true">×</a></div></div>
+    <% end %>
+    <% unless alert.nil? %>
+    <div class="alert"><div class="container"><%= alert %><a class="close" data-dismiss="notice" href="" aria-hidden="true">×</a></div></div>
+    <% end %>
+  <div class="container">
+    
+    <%= yield %>
+    </div>
+  </body>
+</html>
