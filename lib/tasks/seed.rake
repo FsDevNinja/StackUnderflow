@@ -6,7 +6,7 @@ namespace :stack do
     categories = ["All", "CSS", "Databases", "Feedback", "Gems", "General", "Javascript", "Rails","Ruby","Servers", "Showcase", "Testing", "Tips"]
 
 
-    25.times do
+    5.times do
       User.create(
         first_name: FFaker::Name.first_name,
         last_name: FFaker::Name.last_name,
@@ -17,7 +17,7 @@ namespace :stack do
     end
 
     User.all.each do |user|
-      15.times do
+      5.times do
         ForumThread.create(
           user_id: user.id,
           subject: FFaker::DizzleIpsum.sentence,
@@ -27,7 +27,7 @@ namespace :stack do
     end
 
     ForumThread.all.each do |forumthread|
-      15.times do
+      5.times do
         forumthread.forum_posts.create(
           user_id: User.all.pluck(:id).sample,
           forum_thread_id: forumthread.id,
